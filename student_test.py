@@ -3,8 +3,8 @@ import student
 
 
 
-def test_BA():
-    input_values=['Bruce','Alfred']
+def test_simple_even():
+    input_values=['2']
     output=[]
 
     def mock_input(s=None):
@@ -20,10 +20,10 @@ def test_BA():
 
     student.main()
 
-    assert "false" in output[2].lower()
+    assert "even" in output[1].lower()
 
-def test_bA():
-    input_values=['bruce','Alfred']
+def test_negative_even():
+    input_values=['-2']
     output=[]
 
     def mock_input(s=None):
@@ -39,10 +39,10 @@ def test_bA():
 
     student.main()
 
-    assert "false" in output[2].lower()
+    assert "even" in output[1].lower()
 
-def test_Ba():
-    input_values=['Bruce','alfred']
+def test_simple_odd():
+    input_values=['5']
     output=[]
 
     def mock_input(s=None):
@@ -58,10 +58,10 @@ def test_Ba():
 
     student.main()
 
-    assert "false" in output[2].lower()
+    assert "odd" in output[1].lower()
 
-def test_AB():
-    input_values=['Alfred','Bruce']
+def test_negative_odd():
+    input_values=['-9']
     output=[]
 
     def mock_input(s=None):
@@ -77,10 +77,10 @@ def test_AB():
 
     student.main()
 
-    assert "true" in output[2].lower()
+    assert "odd" in output[1].lower()
 
-def test_aB():
-    input_values=['alfred','Bruce']
+def test_zero_case():
+    input_values=['0']
     output=[]
 
     def mock_input(s=None):
@@ -96,62 +96,24 @@ def test_aB():
 
     student.main()
 
-    assert "true" in output[2].lower()
+    assert "even" in output[1].lower()
 
-def test_Ab():
-    input_values=['Alfred','bruce']
-    output=[]
+def test_multi_odd_case():
+    for i in [-9, -3, -31, -41, -99, -19, 87, 19, 3]:
+        input_values=[str(i)]
+        output=[]
 
-    def mock_input(s=None):
-        if s is not None:
-            output.append(s)
-            return input_values.pop(0)
-        else:
-            output.append("")
-            return input_values.pop(0)
-    
-    student.input = mock_input
-    student.print = lambda s : output.append(s)
+        def mock_input(s=None):
+            if s is not None:
+                output.append(s)
+                return input_values.pop(0)
+            else:
+                output.append("")
+                return input_values.pop(0)
+        
+        student.input = mock_input
+        student.print = lambda s : output.append(s)
 
-    student.main()
+        student.main()
 
-    assert "true" in output[2].lower()
-
-
-def test_BB():
-    input_values=['Bruce','Bruce']
-    output=[]
-
-    def mock_input(s=None):
-        if s is not None:
-            output.append(s)
-            return input_values.pop(0)
-        else:
-            output.append("")
-            return input_values.pop(0)
-    
-    student.input = mock_input
-    student.print = lambda s : output.append(s)
-
-    student.main()
-
-    assert "true" in output[2].lower()
-
-def test_more():
-    input_values=['Brute','Bruce']
-    output=[]
-
-    def mock_input(s=None):
-        if s is not None:
-            output.append(s)
-            return input_values.pop(0)
-        else:
-            output.append("")
-            return input_values.pop(0)
-    
-    student.input = mock_input
-    student.print = lambda s : output.append(s)
-
-    student.main()
-
-    assert "false" in output[2].lower()
+        assert "odd" in output[1].lower()
